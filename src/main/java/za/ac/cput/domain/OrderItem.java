@@ -7,4 +7,11 @@ Date: 23 March 2026
 */
 
 public class OrderItem {
+   private String orderItemId;
+   private int quantity;
+   private double unitPrice;
+
+   private OrderItem(){
+
+    }
 }
