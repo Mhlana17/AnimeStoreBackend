@@ -16,7 +16,7 @@ public class Order {
 
     }
 
-    public Order(String orderId, String orderDate, double amount, String status) {
+    public Order(String orderId, String orderDate, double orderTotalAmount, String status) {
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.orderTotalAmount = orderTotalAmount;
@@ -26,7 +26,7 @@ public class Order {
         return orderId;
     }
 
-    public String getOrderDateDate() {
+    public String getOrderDate() {
         return orderDate;
     }
 
@@ -36,6 +36,30 @@ public class Order {
 
     public String getStatus() {
         return status;
+    }
+
+    public OrderItem[] getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public void setOrderTotalAmount(double orderTotalAmount) {
+        this.orderTotalAmount = orderTotalAmount;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setOrderItems(OrderItem[] orderItems) {
+        this.orderItems = orderItems;
     }
 
     @Override
