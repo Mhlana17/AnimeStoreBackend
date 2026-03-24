@@ -6,6 +6,8 @@ Author: Vumbhoni Clifford Mnisi (222929456)
 Date: 23 March 2026
 */
 
+import java.util.UUID;
+
 public class OrderItem extends Order {
    private String orderItemId;
    private String itemDescription;
@@ -47,4 +49,33 @@ public class OrderItem extends Order {
                 ", unitPrice=" + unitPrice +
                 '}';
     }
+public static  class Builder{
+    private String orderItemId;
+    private String itemDescription;
+    private int itemQuantity;
+    private double unitPrice;
+
+    public Builder orderItemId(){
+        this.orderItemId = UUID.randomUUID().toString();
+        return this;
+    }
+    public Builder itemDescription(){
+        this.itemDescription = UUID.randomUUID().toString();
+        return this;
+    }
+    public Builder itemQuantity(){
+        this.itemQuantity = 1;
+        return this;
+    }
+    public Builder unitPrice(){
+        this.unitPrice = 1.0;
+        return this;
+    }
+    public OrderItem build(){
+        return new OrderItem(orderItemId,itemDescription,itemQuantity,unitPrice);
+    }
+    public static Builder builder() {
+        return new Builder();
+    }
+}
 }
