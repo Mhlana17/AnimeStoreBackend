@@ -6,26 +6,24 @@ import za.ac.cput.util.Helper;
 public class ProductFactory {
 
     public static Product createProduct(Long productId, String productName, Double productPrice ){
-        if (!Helper.isValidId(productId)){
-            System.out.println("Invalid product ID");
+        if (Helper.isNullOrEmpty(productName)){
+            System.out.println("Product name" + productName);
             return null;
         }
-        if (!Helper.isNullOrEmpty(productName)){
-            System.out.println("Invalid product name");
+        if (!Helper.isValidId(productId)){
+            System.out.println("Invalid product ID: " + productId);
             return null;
         }
         if (!Helper.isValidPrice(productPrice)){
-            System.out.println("Invalid product price");
+            System.out.println("Invalid product price: " + productPrice);
             return null;
         }
 
-
-          return new Product.Builder().setProductId(productId).setProductName(productName)
-                  .setProductPrice(productPrice)
-                  .build();
-
+        return new Product.Builder()
+                .setProductId(productId)
+                .setProductName(productName)
+                .setProductPrice(productPrice)
+                .build();
 
     }//end of create
-
-
 }//end of class
