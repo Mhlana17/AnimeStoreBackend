@@ -15,8 +15,6 @@ public class Product {
         this.productName = builder.productName;
         this.productPrice = builder.productPrice;
 
-
-
     }//end of builder
 
     public Long getProductId() {
@@ -76,8 +74,5 @@ public class Product {
 
 
     }
-
-
-
 
 }//end of class
