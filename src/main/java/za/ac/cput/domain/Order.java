@@ -8,7 +8,7 @@ Date: 23 March 2026
 public class Order {
     private String orderId;
     private String orderDate;
-    private double amount;
+    private double orderTotalAmount;
     private String status;
 
     public Order(){
@@ -18,7 +18,7 @@ public class Order {
     public Order(String orderId, String orderDate, double amount, String status) {
         this.orderId = orderId;
         this.orderDate = orderDate;
-        this.amount = amount;
+        this.orderTotalAmount = orderTotalAmount;
         this.status = status;
     }
     public String getOrderId() {
@@ -30,7 +30,7 @@ public class Order {
     }
 
     public double getAmount() {
-        return amount;
+        return orderTotalAmount;
     }
 
     public String getStatus() {
@@ -42,7 +42,7 @@ public class Order {
         return "Order{" +
                 "orderId='" + orderId + '\'' +
                 ", orderDate='" + orderDate + '\'' +
-                ", amount=" + amount +
+                ", amount=" + orderTotalAmount +
                 ", status='" + status + '\'' +
                 '}';
     }
