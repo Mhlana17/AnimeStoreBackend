@@ -6,7 +6,6 @@ Author: Vumbhoni Clifford Mnisi (222929456)
 Date: 23 March 2026
 */
 
-import java.util.UUID;
 
 public class OrderItem extends Order {
    private String orderItemId;
@@ -40,16 +39,18 @@ public class OrderItem extends Order {
         return unitPrice;
     }
 
+
     @Override
     public String toString() {
         return "OrderItem{" +
                 "orderItemId='" + orderItemId + '\'' +
-                ", itemName='" + itemDescription + '\'' +
-                ", itemQuantity=" + itemQuantity +'\'' +
+                ", itemDescription='" + itemDescription + '\'' +
+                ", itemQuantity=" + itemQuantity +
                 ", unitPrice=" + unitPrice +
                 '}';
     }
-public static  class Builder{
+
+    public static  class Builder{
     private String orderItemId;
     private String itemDescription;
     private int itemQuantity;
@@ -76,7 +77,8 @@ public static  class Builder{
         return this;
     }
     public OrderItem build(){
-        return new OrderItem(orderId, orderDate, orderTotalAmount, status,orderItemId,itemDescription,itemQuantity,unitPrice);
+        return new OrderItem(orderId, orderDate, orderTotalAmount, status,orderItemId,
+                itemDescription,itemQuantity,unitPrice);
     }
     public static Builder builder() {
         return new Builder();
