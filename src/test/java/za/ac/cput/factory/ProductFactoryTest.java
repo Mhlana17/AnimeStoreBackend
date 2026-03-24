@@ -1,5 +1,10 @@
 package za.ac.cput.factory;
-
+/*
+AnimeStore.java
+ProductFactoryTest class
+Author: Sisonke Mhlana(221805486)
+Date: 24 March 2026
+*/
 import org.junit.jupiter.api.BeforeEach;
 import za.ac.cput.domain.Product;
 import org.junit.jupiter.api.Test;
@@ -18,8 +23,4 @@ class ProductFactoryTest {
         assertNotNull(product1);
         System.out.println(product1.toString());
     }
-
-
-
-
 }//end of class
