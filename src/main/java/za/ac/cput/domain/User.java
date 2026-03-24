@@ -5,26 +5,16 @@ public class User {
     public String userName;
     public String email;
 
-    public User() {
+    private  User() {
     }
 
-    public User(String userId, String userName, String email) {
-        this.userId = userId;
-        this.userName = userName;
-        this.email = email;
+    public User (Builder builder){
+        this.userId = builder.userId;
+        this.userName = builder.userName;
+        this.email = builder.email;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getUserId() {
         return userId;
@@ -45,5 +35,33 @@ public class User {
                 ", userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+    public static class Builder {
+        private String userId;
+        private String userName;
+        private String email;
+
+        public Builder setUserId(String userId) {
+            this.userId = userId;
+            return this;
+        }
+
+        public Builder setUserName(String userName) {
+            this.userName = userName;
+            return this;
+        }
+
+        public Builder setEmail(String email) {
+            this.email = email;
+            return this;
+        }
+        public Builder copy(User user){
+            this.userId  = user.userId;
+            this.userName = user.userName;
+            this.email = user.email;
+        }
+        public User build(){
+            return  new User(this);
+        }
     }
 }
