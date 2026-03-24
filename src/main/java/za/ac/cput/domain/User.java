@@ -59,6 +59,7 @@ public class User {
             this.userId  = user.userId;
             this.userName = user.userName;
             this.email = user.email;
+            return this;
         }
         public User build(){
             return  new User(this);
