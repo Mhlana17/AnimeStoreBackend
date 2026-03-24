@@ -7,54 +7,51 @@ public class Payment {
     private double amount;
     private String status;
 
-    //Constructor
-    public Payment(String paymentId, String orderId, String method, double amount, String status) {
-        this.paymentId = paymentId;
-        this.orderId = orderId;
-        this.method = method;
-        this.amount = amount;
-        this.status = status;
+    // Private constructor that takes a Builder
+    private Payment(Builder builder) {
+        this.paymentId = builder.paymentId;
+        this.orderId = builder.orderId;
+        this.method = builder.method;
+        this.amount = builder.amount;
+        this.status = builder.status;
     }
 
-    //Getters and Setters
-    public String getPaymentId() {
-        return paymentId;
-    }
+    // Static inner Builder class
+    public static class Builder {
+        private String paymentId;
+        private String orderId;
+        private String method;
+        private double amount;
+        private String status;
 
-    public void setPaymentId(String paymentId) {
-        this.paymentId = paymentId;
-    }
+        public Builder setPaymentId(String paymentId) {
+            this.paymentId = paymentId;
+            return this;
+        }
 
-    public String getOrderId() {
-        return orderId;
-    }
+        public Builder setOrderId(String orderId) {
+            this.orderId = orderId;
+            return this;
+        }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
+        public Builder setMethod(String method) {
+            this.method = method;
+            return this;
+        }
 
-    public double getAmount() {
-        return amount;
-    }
+        public Builder setAmount(double amount) {
+            this.amount = amount;
+            return this;
+        }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
+        public Builder setStatus(String status) {
+            this.status = status;
+            return this;
+        }
+        public Payment build() {
+            return new Payment(this);
+        }
 
-    public String getMethod() {
-        return method;
-    }
-
-    public void setMethod(String method) {
-        this.method = method;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     @Override
@@ -68,3 +65,4 @@ public class Payment {
                 '}';
     }
 }
+
