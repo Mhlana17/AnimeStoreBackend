@@ -1,5 +1,10 @@
 package za.ac.cput.factory;
-
+/*
+AnimeStore.java
+ProductFactory class
+Author: Sisonke Mhlana(221805486)
+Date: 24 March 2026
+*/
 import za.ac.cput.domain.Product;
 import za.ac.cput.util.Helper;
 
