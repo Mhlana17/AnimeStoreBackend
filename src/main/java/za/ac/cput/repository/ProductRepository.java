@@ -1,4 +1,10 @@
 package za.ac.cput.repository;
+/*
+AnimeStore.java
+ProductRepository class
+Author: Sisonke Mhlana(221805486)
+Date: 24 March 2026
+*/
 
 import za.ac.cput.domain.Product;
 
@@ -12,7 +18,6 @@ public class ProductRepository implements IProductRepository {
 
     private ProductRepository(){
         productList = new ArrayList<>();
-
     }
 
     public static  IProductRepository getRepository(){
