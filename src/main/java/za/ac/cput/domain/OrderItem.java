@@ -14,16 +14,16 @@ public class OrderItem extends Order {
    private int itemQuantity;
    private double unitPrice;
 
-   private OrderItem(){
-
+   private OrderItem(){}
+    public OrderItem(String orderId, String orderDate, double orderTotalAmount, String status, String orderItemId,
+                     String itemDescription, int itemQuantity, double unitPrice) {
+        super(orderId, orderDate, orderTotalAmount, status);
+        this.orderItemId = orderItemId;
+        this.itemDescription = itemDescription;
+        this.itemQuantity = itemQuantity;
+        this.unitPrice = unitPrice;
     }
-    public OrderItem(String orderItemId,String itemDescription, int itemQuantity, double unitPrice) {
-       this.orderItemId = orderItemId;
-       this.itemDescription = itemDescription;
-       this.itemQuantity = itemQuantity;
-       this.unitPrice = unitPrice;
 
-    }
 
     public String getOrderItemId() {
         return orderItemId;
@@ -54,28 +54,34 @@ public static  class Builder{
     private String itemDescription;
     private int itemQuantity;
     private double unitPrice;
+    private String orderId;
+    private String orderDate;
+    private double orderTotalAmount;
+    private String status;
 
     public Builder orderItemId(){
-        this.orderItemId = UUID.randomUUID().toString();
+        this.orderItemId = orderItemId;
         return this;
     }
     public Builder itemDescription(){
-        this.itemDescription = UUID.randomUUID().toString();
+        this.itemDescription = itemDescription;
         return this;
     }
     public Builder itemQuantity(){
-        this.itemQuantity = 1;
+        this.itemQuantity = itemQuantity;
         return this;
     }
     public Builder unitPrice(){
-        this.unitPrice = 1.0;
+        this.unitPrice = unitPrice;
         return this;
     }
     public OrderItem build(){
-        return new OrderItem(orderItemId,itemDescription,itemQuantity,unitPrice);
+        return new OrderItem(orderId, orderDate, orderTotalAmount, status,orderItemId,itemDescription,itemQuantity,unitPrice);
     }
     public static Builder builder() {
         return new Builder();
     }
+    }
 }
-}
+
+

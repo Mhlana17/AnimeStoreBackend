@@ -10,6 +10,7 @@ public class Order {
     private String orderDate;
     private double orderTotalAmount;
     private String status;
+    private OrderItem [] orderItems;
 
     public Order(){
 
