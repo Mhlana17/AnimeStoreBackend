@@ -55,12 +55,16 @@ public class User {
             this.email = email;
             return this;
         }
-        public Builder copy(User user){
-            this.userId  = user.userId;
+        public Builder copy(User user) {
+            this.userId = user.userId;
             this.userName = user.userName;
             this.email = user.email;
             return this;
         }
+
+
+
+
         public User build(){
             return  new User(this);
         }
