@@ -1,14 +1,14 @@
 package za.ac.cput.domain;
 
 public class User {
-    public String userId;
-    public String userName;
-    public String email;
+    private String userId;
+    private String userName;
+    private String email;
 
     private  User() {
     }
 
-    public User (Builder builder){
+    public  User (Builder builder){
         this.userId = builder.userId;
         this.userName = builder.userName;
         this.email = builder.email;
