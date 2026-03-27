@@ -1,4 +1,7 @@
 package za.ac.cput.domain;
+
+import java.util.Arrays;
+
 /*
 AnimeStore.java
 Order class
@@ -10,7 +13,8 @@ public class Order {
     private String orderDate;
     private double orderTotalAmount;
     private String status;
-    private OrderItem [] orderItems;
+    private OrderItem[] orderItems;
+
 
     public Order(){
 
@@ -37,7 +41,6 @@ public class Order {
     public String getStatus() {
         return status;
     }
-
     public OrderItem[] getOrderItems() {
         return orderItems;
     }
@@ -57,7 +60,6 @@ public class Order {
     public void setStatus(String status) {
         this.status = status;
     }
-
     public void setOrderItems(OrderItem[] orderItems) {
         this.orderItems = orderItems;
     }
@@ -67,9 +69,9 @@ public class Order {
         return "Order{" +
                 "orderId='" + orderId + '\'' +
                 ", orderDate='" + orderDate + '\'' +
-                ", amount=" + orderTotalAmount +
+                ", orderTotalAmount=" + orderTotalAmount +
                 ", status='" + status + '\'' +
+                ", orderItems=" + Arrays.toString(orderItems) +
                 '}';
     }
-
 }
