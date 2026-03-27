@@ -1,3 +1,4 @@
+//Author: Phihlello Junaid Maroga 219354359
 package za.ac.cput.domain;
 
 public class User {

@@ -1,3 +1,5 @@
+//Author: Phihlello Junaid Maroga 219354359
+//Author: Sisonke Mhlana(221805486)
 package za.ac.cput.util;
 
 import org.apache.commons.validator.routines.EmailValidator;
@@ -19,14 +21,6 @@ public class Helper {
     public static boolean isValidId(Long id) {
         return id != null && id > 0;
     }
-
-
-
-
-
-
-
-
 
 
 }//end of Helper class
