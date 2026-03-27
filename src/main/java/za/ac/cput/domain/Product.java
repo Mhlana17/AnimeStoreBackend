@@ -1,4 +1,10 @@
 package za.ac.cput.domain;
+/*
+AnimeStore.java
+Product class
+Author: Sisonke Mhlana(221805486)
+Date: 24 March 2026
+*/
 
 public class Product {
     private Long productId;
@@ -15,18 +21,14 @@ public class Product {
         this.productName = builder.productName;
         this.productPrice = builder.productPrice;
 
-
-
-    }//end of builder
+    }
 
     public Long getProductId() {
         return productId;
     }
-
     public String getProductName() {
         return productName;
     }
-
     public Double getProductPrice() {
         return productPrice;
     }
@@ -73,11 +75,6 @@ public class Product {
             return new Product(this);
         }
 
-
-
     }
-
-
-
 
 }//end of class
