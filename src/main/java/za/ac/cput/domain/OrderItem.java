@@ -7,16 +7,16 @@ Date: 23 March 2026
 */
 
 
-public class OrderItem extends Order {
+public class OrderItem {
    private String orderItemId;
    private String itemDescription;
    private int itemQuantity;
    private double unitPrice;
 
    private OrderItem(){}
+
     public OrderItem(String orderId, String orderDate, double orderTotalAmount, String status, String orderItemId,
                      String itemDescription, int itemQuantity, double unitPrice) {
-        super(orderId, orderDate, orderTotalAmount, status);
         this.orderItemId = orderItemId;
         this.itemDescription = itemDescription;
         this.itemQuantity = itemQuantity;
@@ -27,9 +27,6 @@ public class OrderItem extends Order {
     public String getOrderItemId() {
         return orderItemId;
     }
-    public void setOrderItemId(String orderItemId) {
-       this.orderItemId = orderItemId;
-    }
 
     public int getQuantity() {
         return itemQuantity;
@@ -39,6 +36,9 @@ public class OrderItem extends Order {
         return unitPrice;
     }
 
+    public String getItemDescription() {
+        return itemDescription;
+    }
 
     @Override
     public String toString() {
@@ -50,40 +50,82 @@ public class OrderItem extends Order {
                 '}';
     }
 
-    public static  class Builder{
-    private String orderItemId;
-    private String itemDescription;
-    private int itemQuantity;
-    private double unitPrice;
-    private String orderId;
-    private String orderDate;
-    private double orderTotalAmount;
-    private String status;
+    public static class Builder {
+        private String orderItemId;
+        private String itemDescription;
+        private int itemQuantity;
+        private double unitPrice;
 
-    public Builder orderItemId(){
-        this.orderItemId = orderItemId;
-        return this;
+        private String orderId;
+        private String orderDate;
+        private double orderTotalAmount;
+        private String status;
+
+        public Builder setOrderItemId(){
+            this.orderItemId =orderItemId;
+            return this;
+        }
+
+        public Builder setItemDescription(String itemDescription){
+            this.itemDescription = itemDescription;
+            return this;
+        }
+
+        public Builder setItemQuantity(int itemQuantity){
+            this.itemQuantity = itemQuantity;
+            return this;
+        }
+
+        public Builder setUnitPrice(double unitPrice){
+            this.unitPrice = unitPrice;
+            return this;
+        }
+
+        public Builder setOrderId(String orderId){
+            this.orderId = orderId;
+            return this;
+        }
+
+        public Builder setOrderDate(String orderDate){
+            this.orderDate = orderDate;
+            return this;
+        }
+
+        public Builder setOrderTotalAmount(double amount){
+            this.orderTotalAmount = amount;
+            return this;
+        }
+
+        public Builder setStatus(String status){
+            this.status = status;
+            return this;
+        }
+
+        public OrderItem build(){
+            return new OrderItem(
+                    orderId,
+                    orderDate,
+                    orderTotalAmount,
+                    status,
+                    orderItemId,
+                    itemDescription,
+                    itemQuantity,
+                    unitPrice
+            );
+        }
+
+        public static Builder builder(){
+            return new Builder();
+        }
+
+        public Builder copy(OrderItem orderItem){
+            this.orderItemId = orderItem.getOrderItemId();
+            this.itemDescription = orderItem.getItemDescription();
+            this.itemQuantity = orderItem.getQuantity();
+            this.unitPrice = orderItem.getUnitPrice();
+            return this;
+        }
     }
-    public Builder itemDescription(){
-        this.itemDescription = itemDescription;
-        return this;
     }
-    public Builder itemQuantity(){
-        this.itemQuantity = itemQuantity;
-        return this;
-    }
-    public Builder unitPrice(){
-        this.unitPrice = unitPrice;
-        return this;
-    }
-    public OrderItem build(){
-        return new OrderItem(orderId, orderDate, orderTotalAmount, status,orderItemId,
-                itemDescription,itemQuantity,unitPrice);
-    }
-    public static Builder builder() {
-        return new Builder();
-    }
-    }
-}
 
 
