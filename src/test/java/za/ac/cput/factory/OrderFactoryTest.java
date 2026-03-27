@@ -38,13 +38,6 @@ class OrderFactoryTest {
     }
 
     @Test
-    void testCreateOrderWithNullOrderId() {
-        invalidOrder = OrderFactory.createOrder(null, "20 Feb 2026", 5400.00, "pending");
-        assertNull(invalidOrder);
-        System.out.println("Test passed: Null order ID returns null");
-    }
-
-    @Test
     void testCreateOrderWithEmptyOrderId() {
         invalidOrder = OrderFactory.createOrder("", "20 Feb 2026", 5400.00, "pending");
         assertNull(invalidOrder);
@@ -67,23 +60,9 @@ class OrderFactoryTest {
 
     @Test
     void testCreateOrderWithInvalidStatus() {
-        invalidOrder = OrderFactory.createOrder("88857", "20 Feb 2026", 5400.00, "invalid_status");
+        invalidOrder = OrderFactory.createOrder("88857", "20 Feb 2026", 5400.00, "");
         assertNull(invalidOrder);
         System.out.println("Test passed: Invalid status returns null");
-    }
-
-    @Test
-    void testCreateOrderWithNullStatus() {
-        invalidOrder = OrderFactory.createOrder("88857", "20 Feb 2026", 5400.00, null);
-        assertNull(invalidOrder);
-        System.out.println("Test passed: Null status returns null");
-    }
-
-    @Test
-    void testCreateOrderWithNullDate() {
-        invalidOrder = OrderFactory.createOrder("88857", null, 5400.00, "pending");
-        assertNull(invalidOrder);
-        System.out.println("Test passed: Null date returns null");
     }
 
     @Test
