@@ -61,42 +61,42 @@ public class OrderItem {
         private double orderTotalAmount;
         private String status;
 
-        public Builder orderItemId(){
+        public Builder setOrderItemId(){
             this.orderItemId =orderItemId;
             return this;
         }
 
-        public Builder itemDescription(String itemDescription){
+        public Builder setItemDescription(String itemDescription){
             this.itemDescription = itemDescription;
             return this;
         }
 
-        public Builder itemQuantity(int itemQuantity){
+        public Builder setItemQuantity(int itemQuantity){
             this.itemQuantity = itemQuantity;
             return this;
         }
 
-        public Builder unitPrice(double unitPrice){
+        public Builder setUnitPrice(double unitPrice){
             this.unitPrice = unitPrice;
             return this;
         }
 
-        public Builder orderId(String orderId){
+        public Builder setOrderId(String orderId){
             this.orderId = orderId;
             return this;
         }
 
-        public Builder orderDate(String orderDate){
+        public Builder setOrderDate(String orderDate){
             this.orderDate = orderDate;
             return this;
         }
 
-        public Builder orderTotalAmount(double amount){
+        public Builder setOrderTotalAmount(double amount){
             this.orderTotalAmount = amount;
             return this;
         }
 
-        public Builder status(String status){
+        public Builder setStatus(String status){
             this.status = status;
             return this;
         }
