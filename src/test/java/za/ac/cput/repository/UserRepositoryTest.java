@@ -22,7 +22,7 @@ class UserRepositoryTest {
 
     @BeforeEach
     public void setUp() {
-        // Clear repository before each test
+        
         repository.deleteAll();
         
         user = UserFactory.createUser(

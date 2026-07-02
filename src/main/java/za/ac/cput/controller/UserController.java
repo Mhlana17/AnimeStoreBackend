@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.domain.User;
-import za.ac.cput.service.UserService;
+import za.ac.cput.service.IUserService;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,10 +15,10 @@ import java.util.Optional;
 @RequestMapping("/api/users")
 public class UserController {
     
-    private final UserService userService;
+    private final IUserService userService;
     
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(IUserService userService) {
         this.userService = userService;
     }
     

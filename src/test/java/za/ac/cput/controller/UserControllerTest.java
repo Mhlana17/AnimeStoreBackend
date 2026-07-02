@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import za.ac.cput.domain.User;
-import za.ac.cput.service.UserService;
+import za.ac.cput.service.IUserService;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -24,7 +24,7 @@ public class UserControllerTest {
     private MockMvc mockMvc;
     
     @Autowired
-    private UserService userService;
+    private IUserService userService;
     
     @Autowired
     private ObjectMapper objectMapper;
