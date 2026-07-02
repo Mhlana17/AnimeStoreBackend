@@ -1,9 +1,18 @@
 //Author: Phihlello Junaid Maroga 219354359
 package za.ac.cput.domain;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
     private String userId;
+    
+    @Column(nullable = false)
     private String userName;
+    
+    @Column(nullable = false, unique = true)
     private String email;
 
     private  User() {
@@ -27,6 +36,18 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
