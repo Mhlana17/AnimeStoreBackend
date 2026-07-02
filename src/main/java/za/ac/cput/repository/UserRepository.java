@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, String>, IUserRepository {
+public interface UserRepository extends JpaRepository<User, String> {
     
     /**
      * Search for users by userName
