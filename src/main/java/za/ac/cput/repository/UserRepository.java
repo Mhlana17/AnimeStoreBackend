@@ -1,64 +1,34 @@
 //Author: Phihlello Junaid Maroga 219354359
 package za.ac.cput.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.User;
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.Optional;
 
-public class UserRepository implements IUserRepository {
-
-    private static UserRepository repository = null;
-    private List<User> userList;
-
-    private UserRepository() {
-        userList = new ArrayList<>();
-    }
-
-    public static UserRepository getRepository() {
-        if (repository == null) {
-            repository = new UserRepository();
-        }
-        return repository;
-    }
-
-    @Override
-    public User create(User user) {
-        userList.add(user);
-        return user;
-    }
-
-    @Override
-    public User read(String userId) {
-        for (User user : userList) {
-            if (user.getUserId().equals(userId)) {
-                return null;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public User update(User user) {
-        User oldUser = read(user.getUserId());
-        if (oldUser == null) {
-            return null;
-        }
-        userList.remove(oldUser);
-        userList.add(user);
-        return user;
-    }
-
-    @Override
-    public boolean delete(String id) {
-        User userToDelete = read(id);
-        if (userToDelete == null) {
-            return false;
-        }
-        return userList.remove(userToDelete);
-    }
-
-    @Override
-    public List<User> getAll() {
-        return userList;
-    }
+@Repository
+public interface UserRepository extends JpaRepository<User, String>, IUserRepository {
+    
+    /**
+     * Search for users by userName
+     * @param userName the username to search
+     * @return list of users matching the userName
+     */
+    List<User> findByUserName(String userName);
+    
+    /**
+     * Search for users by email
+     * @param email the email to search
+     * @return optional containing user if found
+     */
+    Optional<User> findByEmail(String email);
+    
+    /**
+     * Search for users by userName containing a pattern
+     * @param pattern the search pattern
+     * @return list of users matching the pattern
+     */
+    List<User> findByUserNameContainingIgnoreCase(String pattern);
 }
