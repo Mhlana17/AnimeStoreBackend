@@ -29,7 +29,7 @@ public class UserController {
      */
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        User createdUser = userService.createUser(user);
+        User createdUser = userService.create(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
     
@@ -40,7 +40,7 @@ public class UserController {
      */
     @GetMapping("/{userId}")
     public ResponseEntity<User> readUser(@PathVariable String userId) {
-        Optional<User> user = userService.readUser(userId);
+        Optional<User> user = userService.read(userId);
         return user.map(ResponseEntity::ok)
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
@@ -51,7 +51,7 @@ public class UserController {
      */
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = userService.getAllUsers();
+        List<User> users = userService.getAll();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
     
@@ -64,10 +64,10 @@ public class UserController {
     @PutMapping("/{userId}")
     public ResponseEntity<User> updateUser(@PathVariable String userId, @RequestBody User user) {
         try {
-            User existingUser = userService.readUser(userId)
+            User existingUser = userService.read(userId)
                     .orElseThrow(() -> new IllegalArgumentException("User not found"));
             user.setUserId(userId);
-            User updatedUser = userService.updateUser(user);
+            User updatedUser = userService.update(user);
             return new ResponseEntity<>(updatedUser, HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -81,7 +81,7 @@ public class UserController {
      */
     @DeleteMapping("/{userId}")
     public ResponseEntity<Void> deleteUser(@PathVariable String userId) {
-        boolean deleted = userService.deleteUser(userId);
+        boolean deleted = userService.delete(userId);
         if (deleted) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

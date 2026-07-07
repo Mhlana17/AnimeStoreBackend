@@ -33,7 +33,7 @@ public class UserControllerTest {
     
     @BeforeEach
     public void setUp() {
-        userService.getAllUsers().forEach(user -> userService.deleteUser(user.getUserId()));
+        userService.getAll().forEach(user -> userService.delete(user.getUserId()));
         
         testUser = new User.Builder()
                 .setUserId("user123")
@@ -55,7 +55,7 @@ public class UserControllerTest {
     
     @Test
     public void testReadUser_Success() throws Exception {
-        userService.createUser(testUser);
+        userService.create(testUser);
         
         mockMvc.perform(get("/api/users/{userId}", "user123")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -74,14 +74,14 @@ public class UserControllerTest {
     
     @Test
     public void testGetAllUsers_Success() throws Exception {
-        userService.createUser(testUser);
+        userService.create(testUser);
         
         User secondUser = new User.Builder()
                 .setUserId("user456")
                 .setUserName("Jane Smith")
                 .setEmail("jane@example.com")
                 .build();
-        userService.createUser(secondUser);
+        userService.create(secondUser);
         
         mockMvc.perform(get("/api/users")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -93,7 +93,7 @@ public class UserControllerTest {
     
     @Test
     public void testUpdateUser_Success() throws Exception {
-        userService.createUser(testUser);
+        userService.create(testUser);
         
         User updatedUser = new User.Builder()
                 .setUserId("user123")
@@ -120,7 +120,7 @@ public class UserControllerTest {
     
     @Test
     public void testDeleteUser_Success() throws Exception {
-        userService.createUser(testUser);
+        userService.create(testUser);
         
         mockMvc.perform(delete("/api/users/{userId}", "user123")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -140,7 +140,7 @@ public class UserControllerTest {
     
     @Test
     public void testSearchByUserName_Success() throws Exception {
-        userService.createUser(testUser);
+        userService.create(testUser);
         
         mockMvc.perform(get("/api/users/search/username/{userName}", "John Doe")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -159,7 +159,7 @@ public class UserControllerTest {
     
     @Test
     public void testSearchByEmail_Success() throws Exception {
-        userService.createUser(testUser);
+        userService.create(testUser);
         
         mockMvc.perform(get("/api/users/search/email/{email}", "john@example.com")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -176,14 +176,14 @@ public class UserControllerTest {
     
     @Test
     public void testSearchByPattern_Success() throws Exception {
-        userService.createUser(testUser);
+        userService.create(testUser);
         
         User secondUser = new User.Builder()
                 .setUserId("user789")
                 .setUserName("Johnny Appleseed")
                 .setEmail("johnny@example.com")
                 .build();
-        userService.createUser(secondUser);
+        userService.create(secondUser);
         
         mockMvc.perform(get("/api/users/search/pattern")
                 .param("pattern", "John")
@@ -194,7 +194,7 @@ public class UserControllerTest {
     
     @Test
     public void testSearchByPattern_NoMatches() throws Exception {
-        userService.createUser(testUser);
+        userService.create(testUser);
         
         mockMvc.perform(get("/api/users/search/pattern")
                 .param("pattern", "NonExistent")
