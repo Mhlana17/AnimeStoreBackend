@@ -22,22 +22,14 @@ public class UserController {
         this.userService = userService;
     }
     
-    /**
-     * Create a new user
-     * @param user the user to create
-     * @return ResponseEntity with created user and 201 status
-     */
+
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
         User createdUser = userService.create(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
     
-    /**
-     * Read a user by ID
-     * @param userId the user ID
-     * @return ResponseEntity with user if found, 404 if not found
-     */
+
     @GetMapping("/{userId}")
     public ResponseEntity<User> readUser(@PathVariable String userId) {
         Optional<User> user = userService.read(userId);
@@ -45,22 +37,14 @@ public class UserController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     
-    /**
-     * Get all users
-     * @return ResponseEntity with list of all users
-     */
+
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAll();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
     
-    /**
-     * Update an existing user
-     * @param userId the user ID
-     * @param user the updated user data
-     * @return ResponseEntity with updated user or 404 if not found
-     */
+
     @PutMapping("/{userId}")
     public ResponseEntity<User> updateUser(@PathVariable String userId, @RequestBody User user) {
         try {
@@ -74,11 +58,7 @@ public class UserController {
         }
     }
     
-    /**
-     * Delete a user by ID
-     * @param userId the user ID
-     * @return ResponseEntity with 204 if deleted, 404 if not found
-     */
+
     @DeleteMapping("/{userId}")
     public ResponseEntity<Void> deleteUser(@PathVariable String userId) {
         boolean deleted = userService.delete(userId);
@@ -88,22 +68,14 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
-    /**
-     * Search users by userName
-     * @param userName the username to search
-     * @return ResponseEntity with list of matching users
-     */
+
     @GetMapping("/search/username/{userName}")
     public ResponseEntity<List<User>> searchByUserName(@PathVariable String userName) {
         List<User> users = userService.searchByUserName(userName);
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
     
-    /**
-     * Search users by email
-     * @param email the email to search
-     * @return ResponseEntity with user if found, 404 if not found
-     */
+
     @GetMapping("/search/email/{email}")
     public ResponseEntity<User> searchByEmail(@PathVariable String email) {
         Optional<User> user = userService.searchByEmail(email);
@@ -111,11 +83,7 @@ public class UserController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     
-    /**
-     * Search users by userName pattern
-     * @param pattern the search pattern
-     * @return ResponseEntity with list of matching users
-     */
+
     @GetMapping("/search/pattern")
     public ResponseEntity<List<User>> searchByPattern(@RequestParam String pattern) {
         List<User> users = userService.searchUsersByPattern(pattern);

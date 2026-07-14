@@ -13,10 +13,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Test class for UserService using TDD approach
- * Tests all CRUD operations and search functionality
- */
+
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class UserServiceTest {
