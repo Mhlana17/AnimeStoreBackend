@@ -14,21 +14,21 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-    
+
     private final IUserService userService;
-    
+
     @Autowired
     public UserController(IUserService userService) {
         this.userService = userService;
     }
-    
+
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
         User createdUser = userService.create(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
-    
+
 
     @GetMapping("/{userId}")
     public ResponseEntity<User> readUser(@PathVariable String userId) {
@@ -36,28 +36,29 @@ public class UserController {
         return user.map(ResponseEntity::ok)
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-    
+
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAll();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
-    
+
 
     @PutMapping("/{userId}")
     public ResponseEntity<User> updateUser(@PathVariable String userId, @RequestBody User user) {
-        try {
-            User existingUser = userService.read(userId)
-                    .orElseThrow(() -> new IllegalArgumentException("User not found"));
-            user.setUserId(userId);
-            User updatedUser = userService.update(user);
-            return new ResponseEntity<>(updatedUser, HttpStatus.OK);
-        } catch (IllegalArgumentException e) {
+        Optional<User> existingUser = userService.read(userId);
+        if (existingUser.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        user.setUserId(userId);
+        User updatedUser = userService.update(user);
+        if (updatedUser == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
-    
+
 
     @DeleteMapping("/{userId}")
     public ResponseEntity<Void> deleteUser(@PathVariable String userId) {
@@ -67,14 +68,14 @@ public class UserController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    
+
 
     @GetMapping("/search/username/{userName}")
     public ResponseEntity<List<User>> searchByUserName(@PathVariable String userName) {
         List<User> users = userService.searchByUserName(userName);
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
-    
+
 
     @GetMapping("/search/email/{email}")
     public ResponseEntity<User> searchByEmail(@PathVariable String email) {
@@ -82,7 +83,7 @@ public class UserController {
         return user.map(ResponseEntity::ok)
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-    
+
 
     @GetMapping("/search/pattern")
     public ResponseEntity<List<User>> searchByPattern(@RequestParam String pattern) {

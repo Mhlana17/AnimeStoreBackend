@@ -15,12 +15,19 @@ public class Helper {
         return price > 0 && price <= 1000000;
     }
     public static boolean isNullOrEmpty(String str){
-        if(str.isEmpty() || str == null)
+        if(str == null || str.isEmpty())
             return true;
         return false;
     }
     public static boolean isValidId(Long id) {
         return id != null && id > 0;
+    }
+
+    public static boolean isValidRole(String role) {
+        if (isNullOrEmpty(role)) {
+            return false;
+        }
+        return role.equalsIgnoreCase("Admin") || role.equalsIgnoreCase("Customer");
     }
 
 

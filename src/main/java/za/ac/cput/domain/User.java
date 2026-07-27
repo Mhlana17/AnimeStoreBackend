@@ -8,12 +8,15 @@ import jakarta.persistence.*;
 public class User {
     @Id
     private String userId;
-    
+
     @Column(nullable = false)
     private String userName;
-    
+
     @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false)
+    private String role;
 
     private  User() {
     }
@@ -22,6 +25,7 @@ public class User {
         this.userId = builder.userId;
         this.userName = builder.userName;
         this.email = builder.email;
+        this.role = builder.role;
     }
 
 
@@ -36,6 +40,14 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public void setUserId(String userId) {
@@ -56,12 +68,14 @@ public class User {
                 "userId='" + userId + '\'' +
                 ", userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
     public static class Builder {
         private String userId;
         private String userName;
         private String email;
+        private String role ;
 
         public Builder setUserId(String userId) {
             this.userId = userId;
@@ -77,18 +91,23 @@ public class User {
             this.email = email;
             return this;
         }
+
+        public Builder setRole(String role) {
+            this.role = role;
+            return this;
+        }
         public Builder copy(User user) {
             this.userId = user.userId;
             this.userName = user.userName;
             this.email = user.email;
+            this.role = user.role;
             return this;
         }
 
 
 
 
-        public User build(){
-            return  new User(this);
+        public User build(){return  new User(this);
         }
     }
 }
