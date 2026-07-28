@@ -1,13 +1,14 @@
 package za.ac.cput.domain;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Order {
     private String orderId;
     private String orderDate;
     private double orderTotalAmount;
     private String status;
-    private OrderItem[] orderItems;
+    private List<OrderItem> orderItems;
 
     // Private constructor
     private Order(){}
@@ -33,8 +34,7 @@ public class Order {
 
         return status;
     }
-    public OrderItem[] getOrderItems() {
-
+    public List<OrderItem> getOrderItems() {
         return orderItems;
     }
 
@@ -45,7 +45,7 @@ public class Order {
                 ", orderDate='" + orderDate + '\'' +
                 ", orderTotalAmount=" + orderTotalAmount +
                 ", status='" + status + '\'' +
-                ", orderItems=" + Arrays.toString(orderItems) +
+                ", orderItems=" + orderItems +
                 '}';
     }
 
@@ -55,7 +55,7 @@ public class Order {
         private String orderDate;
         private double orderTotalAmount;
         private String status;
-        private OrderItem[] orderItems;
+        private List<OrderItem> orderItems;
 
         public Builder setOrderId(String orderId) {
             this.orderId = orderId;
@@ -77,7 +77,7 @@ public class Order {
             return this;
         }
 
-        public Builder setOrderItems(OrderItem[] orderItems) {
+        public Builder setOrderItems(List<OrderItem> orderItems) {
             this.orderItems = orderItems;
             return this;
         }

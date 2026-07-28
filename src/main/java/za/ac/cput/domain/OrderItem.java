@@ -55,12 +55,7 @@ public class OrderItem {
         private int itemQuantity;
         private double unitPrice;
 
-        private String orderId;
-        private String orderDate;
-        private double orderTotalAmount;
-        private String status;
-
-        public Builder setOrderItemId(){
+        public Builder setOrderItemId(String orderItemId) {
             this.orderItemId =orderItemId;
             return this;
         }
@@ -77,26 +72,6 @@ public class OrderItem {
 
         public Builder setUnitPrice(double unitPrice){
             this.unitPrice = unitPrice;
-            return this;
-        }
-
-        public Builder setOrderId(String orderId){
-            this.orderId = orderId;
-            return this;
-        }
-
-        public Builder setOrderDate(String orderDate){
-            this.orderDate = orderDate;
-            return this;
-        }
-
-        public Builder setOrderTotalAmount(double amount){
-            this.orderTotalAmount = amount;
-            return this;
-        }
-
-        public Builder setStatus(String status){
-            this.status = status;
             return this;
         }
         public Builder copy(OrderItem orderItem){

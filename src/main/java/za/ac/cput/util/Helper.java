@@ -22,5 +22,8 @@ public class Helper {
 
         return id != null && id > 0;
     }
+    public static boolean isValidName(int qty){
+        return qty > 0 && qty <= 1000;
+    }
 
 }//end of Helper class
