@@ -25,8 +25,8 @@ class UserFactoryTest {
 
     @Test
     void b_testUserThatFail() {
-        System.out.println(user1);
         assertNotNull(user1);
+        System.out.println(user1);
 
     }
 }

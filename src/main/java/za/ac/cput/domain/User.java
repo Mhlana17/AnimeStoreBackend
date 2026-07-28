@@ -1,9 +1,22 @@
+//Author: Phihlello Junaid Maroga 219354359
 package za.ac.cput.domain;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
     private String userId;
+
+    @Column(nullable = false)
     private String userName;
+
+    @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false)
+    private String role;
 
     private  User() {
     }
@@ -12,6 +25,7 @@ public class User {
         this.userId = builder.userId;
         this.userName = builder.userName;
         this.email = builder.email;
+        this.role = builder.role;
     }
 
 
@@ -28,18 +42,40 @@ public class User {
         return email;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "userId='" + userId + '\'' +
                 ", userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
     public static class Builder {
         private String userId;
         private String userName;
         private String email;
+        private String role ;
 
         public Builder setUserId(String userId) {
             this.userId = userId;
@@ -55,18 +91,23 @@ public class User {
             this.email = email;
             return this;
         }
+
+        public Builder setRole(String role) {
+            this.role = role;
+            return this;
+        }
         public Builder copy(User user) {
             this.userId = user.userId;
             this.userName = user.userName;
             this.email = user.email;
+            this.role = user.role;
             return this;
         }
 
 
 
 
-        public User build(){
-            return  new User(this);
+        public User build(){return  new User(this);
         }
     }
 }
