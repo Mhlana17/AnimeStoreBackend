@@ -2,7 +2,6 @@ package za.ac.cput.factory;
 
 import org.junit.jupiter.api.*;
 import za.ac.cput.domain.Order;
-import za.ac.cput.factory.OrderFactory;
 import za.ac.cput.repository.OrderRepository;
 
 import static org.junit.jupiter.api.Assertions.*;

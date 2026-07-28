@@ -12,7 +12,7 @@ public class OrderFactory {
                                     String status,
                                     OrderItem[] items) {
 
-        // 🔍 Validation using YOUR helper
+
         if (Helper.isNullOrEmpty(orderId) ||
                 Helper.isNullOrEmpty(orderDate) ||
                 Helper.isNullOrEmpty(status) ||

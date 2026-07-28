@@ -9,7 +9,8 @@ public class Order {
     private String status;
     private OrderItem[] orderItems;
 
-    // Private constructor (Builder only)
+    // Private constructor
+    private Order(){}
     private Order(Builder builder) {
         this.orderId = builder.orderId;
         this.orderDate = builder.orderDate;
@@ -25,12 +26,15 @@ public class Order {
         return orderDate;
     }
     public double getAmount() {
+
         return orderTotalAmount;
     }
     public String getStatus() {
+
         return status;
     }
     public OrderItem[] getOrderItems() {
+
         return orderItems;
     }
 
@@ -88,6 +92,7 @@ public class Order {
         }
 
         public Order build() {
+
             return new Order(this);
         }
     }

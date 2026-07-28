@@ -15,12 +15,11 @@ public class OrderItem {
 
    private OrderItem(){}
 
-    public OrderItem(String orderId, String orderDate, double orderTotalAmount, String status, String orderItemId,
-                     String itemDescription, int itemQuantity, double unitPrice) {
-        this.orderItemId = orderItemId;
-        this.itemDescription = itemDescription;
-        this.itemQuantity = itemQuantity;
-        this.unitPrice = unitPrice;
+    public OrderItem(Builder builder) {
+        this.orderItemId = builder.orderItemId;
+        this.itemDescription = builder.itemDescription;
+        this.itemQuantity = builder.itemQuantity;
+        this.unitPrice = builder.unitPrice;
     }
 
 
@@ -100,30 +99,18 @@ public class OrderItem {
             this.status = status;
             return this;
         }
-
-        public OrderItem build(){
-            return new OrderItem(
-                    orderId,
-                    orderDate,
-                    orderTotalAmount,
-                    status,
-                    orderItemId,
-                    itemDescription,
-                    itemQuantity,
-                    unitPrice
-            );
-        }
-
-        public static Builder builder(){
-            return new Builder();
-        }
-
         public Builder copy(OrderItem orderItem){
             this.orderItemId = orderItem.getOrderItemId();
             this.itemDescription = orderItem.getItemDescription();
             this.itemQuantity = orderItem.getQuantity();
             this.unitPrice = orderItem.getUnitPrice();
             return this;
+        }
+
+
+        public OrderItem build(){
+
+            return new OrderItem(this);
         }
     }
     }

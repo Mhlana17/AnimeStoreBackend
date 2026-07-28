@@ -9,24 +9,18 @@ public class Helper {
     }
 
     public static boolean isValidPrice(Double price) {
+
         return price > 0 && price <= 1000000;
     }
     public static boolean isNullOrEmpty(String str){
-        if(str.isEmpty() || str == null)
+        if(str.isEmpty() || str == null) {
             return true;
+        }
         return false;
     }
     public static boolean isValidId(Long id) {
+
         return id != null && id > 0;
     }
-
-
-
-
-
-
-
-
-
 
 }//end of Helper class
