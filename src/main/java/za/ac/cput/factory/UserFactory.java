@@ -24,7 +24,7 @@ public class UserFactory {
 
         }
 
-        if (!Helper.isValidRole(role)) {
+        if (!Helper.isNullOrEmpty(role)) {
             return null;
         }
 

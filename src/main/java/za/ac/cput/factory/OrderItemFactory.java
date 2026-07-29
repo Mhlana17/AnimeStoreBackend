@@ -11,7 +11,7 @@ public class OrderItemFactory {
 
         if (Helper.isNullOrEmpty(orderItem) ||
                 Helper.isNullOrEmpty(iteDescription) ||
-                Helper.isValidName(itemQuantity) ||
+                Helper.isValidQuantity(itemQuantity) ||
                 Helper.isValidPrice(unitPrice)||
                 orderItem.isEmpty()) {
             return null;

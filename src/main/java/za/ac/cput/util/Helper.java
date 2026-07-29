@@ -22,7 +22,7 @@ public class Helper {
 
         return id != null && id > 0;
     }
-    public static boolean isValidName(int qty){
+    public static boolean isValidQuantity(int qty){
         return qty > 0 && qty <= 1000;
     }
 
