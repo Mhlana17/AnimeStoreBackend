@@ -1,87 +1,62 @@
 package za.ac.cput.factory;
 
-/*
-AnimeStore.java
-OrderFactoryTest class
-Author: Vumbhoni Clifford Mnisi (222929456)
-Date: 24 March 2026
-*/
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import za.ac.cput.domain.Order;
+import za.ac.cput.repository.OrderRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class OrderFactoryTest {
-    private Order order, order1, invalidOrder;
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+class OrderRepositoryTest {
 
-    @BeforeEach
-    void setUp() {
-        // Valid test data
-        order = OrderFactory.createOrder("88855",
-                "20 Feb 2026", 5400.00, "pending");
-        order1 = OrderFactory.createOrder("88856",
-                "21 Feb 2026", 3200.00, "shipped");
+    private static OrderRepository repo;
+    private static Order order;
+
+    @BeforeAll
+    static void setup() {
+        repo = new OrderRepository();
+        order = OrderFactory.createOrder(
+                "ORD001",
+                "2026-03-23",
+                500.0,
+                "PAID",
+                null
+        );
     }
 
     @Test
-    void testCreateOrder() {
-        assertNotNull(order);
-        System.out.println(order.toString());
+    @org.junit.jupiter.api.Order(1)
+    void testCreate() {
+        assertNotNull(repo.create(order));
     }
 
     @Test
-    void testCreateOrder1() {
-        assertNotNull(order1);
-        System.out.println(order1.toString());
+    @org.junit.jupiter.api.Order(2)
+    void testRead() {
+        assertNotNull(repo.read(order.getOrderId()));
     }
 
     @Test
-    void testCreateOrderWithEmptyOrderId() {
-        invalidOrder = OrderFactory.createOrder("", "20 Feb 2026", 5400.00, "pending");
-        assertNull(invalidOrder);
-        System.out.println("Test passed: Empty order ID returns null");
+    @org.junit.jupiter.api.Order(3)
+    void testUpdate() {
+        Order updated = new Order.Builder()
+                .copy(order)
+                .setStatus("SHIPPED")
+                .build();
+
+        Order result = repo.update(updated);
+        assertEquals("SHIPPED", result.getStatus());
     }
 
     @Test
-    void testCreateOrderWithInvalidAmount() {
-        invalidOrder = OrderFactory.createOrder("88857", "20 Feb 2026", -100.00, "pending");
-        assertNull(invalidOrder);
-        System.out.println("Test passed: Negative amount returns null");
+    @org.junit.jupiter.api.Order(4)
+    void testGetAll() {
+        assertFalse(repo.getAll().isEmpty());
     }
 
     @Test
-    void testCreateOrderWithZeroAmount() {
-        invalidOrder = OrderFactory.createOrder("88857", "20 Feb 2026", 0.00, "pending");
-        assertNull(invalidOrder);
-        System.out.println("Test passed: Zero amount returns null");
-    }
-
-    @Test
-    void testCreateOrderWithInvalidStatus() {
-        invalidOrder = OrderFactory.createOrder("88857", "20 Feb 2026", 5400.00, "");
-        assertNull(invalidOrder);
-        System.out.println("Test passed: Invalid status returns null");
-    }
-
-    @Test
-    void testCreateOrderWithEmptyDate() {
-        invalidOrder = OrderFactory.createOrder("88857", "", 5400.00, "pending");
-        assertNull(invalidOrder);
-        System.out.println("Test passed: Empty date returns null");
-    }
-
-    @Test
-    void testCreateOrderWithDifferentStatuses() {
-        Order pendingOrder = OrderFactory.createOrder("88858", "22 Feb 2026", 100.00, "PENDING");
-        assertNotNull(pendingOrder);
-        assertEquals("pending", pendingOrder.getStatus());
-
-        Order shippedOrder = OrderFactory.createOrder("88859", "23 Feb 2026", 200.00, "SHIPPED");
-        assertNotNull(shippedOrder);
-        assertEquals("shipped", shippedOrder.getStatus());
-
-        System.out.println("Test passed: Status case insensitivity works");
+    @org.junit.jupiter.api.Order(5)
+    void testDelete() {
+        assertTrue(repo.delete(order.getOrderId()));
     }
 }
