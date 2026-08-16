@@ -4,6 +4,7 @@ import za.ac.cput.domain.Order;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class OrderRepository implements IRepository<Order, String> {
 
@@ -16,33 +17,38 @@ public class OrderRepository implements IRepository<Order, String> {
     }
 
     @Override
-    public Order read(String id) {
-        for (Order o : orders) {
-            if (o.getOrderId().equals(id)) {
-                return o;
+    public Optional<Order> read(String id) {
+        for (Order order : orders) {
+            if (order.getOrderId().equals(id)) {
+                return Optional.of(order);
             }
         }
-        return null;
+
+        return Optional.empty();
     }
 
     @Override
     public Order update(Order order) {
-        Order old = read(order.getOrderId());
-        if (old != null) {
-            orders.remove(old);
+        Optional<Order> oldOrder = read(order.getOrderId());
+
+        if (oldOrder.isPresent()) {
+            orders.remove(oldOrder.get());
             orders.add(order);
             return order;
         }
+
         return null;
     }
 
     @Override
     public boolean delete(String id) {
-        Order o = read(id);
-        if (o != null) {
-            orders.remove(o);
+        Optional<Order> order = read(id);
+
+        if (order.isPresent()) {
+            orders.remove(order.get());
             return true;
         }
+
         return false;
     }
 
