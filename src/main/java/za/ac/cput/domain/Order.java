@@ -1,55 +1,64 @@
 package za.ac.cput.domain;
 
-import java.util.Arrays;
+import jakarta.persistence.*;
+
 import java.util.List;
 
+@Entity
+@Table(name = "orders")
 public class Order {
+
+    @Id
     private String orderId;
+
+    @Column(name = "order_date")
     private String orderDate;
+
+    @Column(name = "total_amount")
     private double orderTotalAmount;
+
+    @Column(name = "status")
     private String status;
+
+    @OneToMany(mappedBy = "order",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true)
     private List<OrderItem> orderItems;
 
-    // Private constructor
-    private Order(){}
-    private Order(Builder builder) {
+    protected Order() {}
+
+    public Order(Builder builder) {
         this.orderId = builder.orderId;
         this.orderDate = builder.orderDate;
         this.orderTotalAmount = builder.orderTotalAmount;
         this.status = builder.status;
         this.orderItems = builder.orderItems;
+        // Set the relationship on each item
+        if (this.orderItems != null) {
+            for (OrderItem item : this.orderItems) {
+                item.setOrder(this);
+            }
+        }
     }
 
-    public String getOrderId() {
-        return orderId;
-    }
-    public String getOrderDate() {
-        return orderDate;
-    }
-    public double getAmount() {
+    // Getters and setters...
+    public String getOrderId() { return orderId; }
+    public String getOrderDate() { return orderDate; }
+    public double getOrderTotalAmount() { return orderTotalAmount; }
+    public String getStatus() { return status; }
+    public List<OrderItem> getOrderItems() { return orderItems; }
 
-        return orderTotalAmount;
-    }
-    public String getStatus() {
-
-        return status;
-    }
-    public List<OrderItem> getOrderItems() {
-        return orderItems;
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+        if (orderItems != null) {
+            for (OrderItem item : orderItems) {
+                item.setOrder(this);
+            }
+        }
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "orderId='" + orderId + '\'' +
-                ", orderDate='" + orderDate + '\'' +
-                ", orderTotalAmount=" + orderTotalAmount +
-                ", status='" + status + '\'' +
-                ", orderItems=" + orderItems +
-                '}';
-    }
-
-    // 🔨 BUILDER
+    // Builder Class
     public static class Builder {
         private String orderId;
         private String orderDate;
@@ -92,7 +101,6 @@ public class Order {
         }
 
         public Order build() {
-
             return new Order(this);
         }
     }
