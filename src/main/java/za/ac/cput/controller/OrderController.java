@@ -9,6 +9,7 @@ import za.ac.cput.service.IOrderService;
 import za.ac.cput.service.OrderService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/orders")
@@ -18,7 +19,7 @@ public class OrderController {
     private final IOrderService orderService;
 
     @Autowired
-    public OrderController(OrderService orderService) {
+    public OrderController(IOrderService orderService) {
         this.orderService = orderService;
     }
 
@@ -37,9 +38,9 @@ public class OrderController {
     // READ - GET by ID
     @GetMapping("/order/{orderId}")
     public ResponseEntity<Order> getOrderById(@PathVariable("orderId") String orderId) {
-        Order order = orderService.read(orderId);
-        if (order != null) {
-            return new ResponseEntity<>(order, HttpStatus.OK);
+        Optional<Order> orderOpt = orderService.read(orderId);
+        if (orderOpt.isPresent()) {
+            return new ResponseEntity<>(orderOpt.get(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

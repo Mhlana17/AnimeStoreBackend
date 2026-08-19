@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Order;
 import za.ac.cput.repository.IOrderRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,9 +21,8 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public Order read(String id) {
-        Optional<Order> order = repository.findById(id);
-        return order.orElse(null);
+    public Optional<Order> read(String id) {
+        return repository.findById(id);
     }
 
     @Override
@@ -30,6 +30,7 @@ public class OrderService implements IOrderService {
         if (repository.existsById(order.getOrderId())) {
             return repository.save(order);
         }
+
         return null;
     }
 
@@ -39,21 +40,45 @@ public class OrderService implements IOrderService {
             repository.deleteById(id);
             return true;
         }
+
         return false;
     }
 
     @Override
     public List<Order> getAllOrders() {
+        return getAll();
+    }
+
+    @Override
+    public List<Order> getAll() {
         return repository.findAll();
     }
 
     @Override
     public List<Order> getOrdersByOrderId(String orderId) {
-        return repository.findByOrderId(orderId);
+        List<Order> orders = repository.findAll();
+        List<Order> result = new ArrayList<>();
+
+        for (Order order : orders) {
+            if (order.getOrderId().equals(orderId)) {
+                result.add(order);
+            }
+        }
+
+        return result;
     }
 
     @Override
     public List<Order> getOrdersByStatus(String status) {
-        return repository.findByStatus(status);
+        List<Order> orders = repository.findAll();
+        List<Order> result = new ArrayList<>();
+
+        for (Order order : orders) {
+            if (order.getStatus().equals(status)) {
+                result.add(order);
+            }
+        }
+
+        return result;
     }
 }
