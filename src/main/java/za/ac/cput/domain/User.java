@@ -18,7 +18,7 @@ public class User {
     @Column(nullable = false)
     private String role;
 
-    private  User() {
+    protected   User() {
     }
 
     public  User (Builder builder){
