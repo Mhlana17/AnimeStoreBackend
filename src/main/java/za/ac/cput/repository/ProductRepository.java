@@ -1,94 +1,35 @@
 package za.ac.cput.repository;
-
 /*
 AnimeStore.java
 ProductRepository class
 Author: Sisonke Mhlana(221805486)
-Date: 24 March 2026
 */
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.Product;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-public class ProductRepository implements IProductRepository {
 
-    private static IProductRepository repository = null;
-    private List<Product> productList;
+@Repository
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    private ProductRepository() {
-        productList = new ArrayList<>();
-    }
+    // Find products with stock greater than 0
+    List<Product> findByStockGreaterThan(int stock);
 
-    public static IProductRepository getRepository() {
+    // Find products with specific stock level
+    List<Product> findByStock(int stock);
 
-        if (repository == null) {
-            repository = new ProductRepository();
-        }
+    // Find products with stock between min and max (inclusive)
+    List<Product> findByStockGreaterThanAndStockLessThanEqual(int minStock, int maxStock);
 
-        return repository;
-    }
+    // Find products by category that are in stock
+    @Query("SELECT p FROM Product p WHERE p.category.categoryId = :categoryId AND p.stock > 0")
+    List<Product> findAvailableProductsByCategory(@Param("categoryId") Long categoryId);
 
-    @Override
-    public Product create(Product product) {
-        boolean success = productList.add(product);
-
-        if (success) {
-            return product;
-        }
-
-        return null;
-    }
-
-    @Override
-    public Optional<Product> read(Long productId) {
-        for (Product product : productList) {
-            if (product.getProductId().equals(productId)) {
-                return Optional.of(product);
-            }
-        }
-
-        return Optional.empty();
-    }
-
-    @Override
-    public Product update(Product product) {
-        Long id = product.getProductId();
-
-        Optional<Product> oldProduct = read(id);
-
-        if (oldProduct.isEmpty()) {
-            return null;
-        }
-
-        boolean success = productList.remove(oldProduct.get());
-
-        if (!success) {
-            return null;
-        }
-
-        if (productList.add(product)) {
-            return product;
-        }
-
-        return null;
-    }
-
-    @Override
-    public boolean delete(Long productId) {
-        Optional<Product> productToDelete = read(productId);
-
-        if (productToDelete.isEmpty()) {
-            return false;
-        }
-
-        return productList.remove(productToDelete.get());
-    }
-
-    @Override
-    public List<Product> getAll() {
-        return productList;
-    }
+    // Find low stock products (stock > 0 but <= threshold)
+    @Query("SELECT p FROM Product p WHERE p.stock > 0 AND p.stock <= :threshold")
+    List<Product> findLowStockProducts(@Param("threshold") int threshold);
 }

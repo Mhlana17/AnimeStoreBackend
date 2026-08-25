@@ -12,11 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProductFactoryTest {
     private Product product1;
+    byte[] sampleImage = "fakeImageData".getBytes();
 
     @BeforeEach
     void setUp() {
 
-        product1 = ProductFactory.createProduct( 49L,"Socks",29.00);
+        product1 = ProductFactory.createProduct( "Hoody",499.00,3, sampleImage);
     }
 @Test
      void testCreateProduct(){
