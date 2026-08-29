@@ -1,5 +1,10 @@
 package za.ac.cput.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.util.Objects;
 
 /**
@@ -8,9 +13,16 @@ import java.util.Objects;
  * Author: Mbasa Mcakumba 241080371
  * Date: 23 March 2026
  */
+@Entity
 public class Category {
-    private String categoryId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long categoryId;
     private String name;
+
+    protected Category() {
+
+    }
 
 
     private Category(Builder builder) {
@@ -19,7 +31,7 @@ public class Category {
     }
 
 
-    public String getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
@@ -52,10 +64,10 @@ public class Category {
 
 
     public static class Builder {
-        private String categoryId;
+        private Long categoryId;
         private String name;
 
-        public Builder setCategoryId(String categoryId) {
+        public Builder setCategoryId(Long categoryId) {
             this.categoryId = categoryId;
             return this;
         }
