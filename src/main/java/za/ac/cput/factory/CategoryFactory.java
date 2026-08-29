@@ -9,10 +9,7 @@ import za.ac.cput.domain.Category;
  */
 public class CategoryFactory {
 
-    public static Category buildCategory(String categoryId, String name) {
-        if (categoryId == null || categoryId.isEmpty() || name == null || name.isEmpty()) {
-            return null;
-        }
+    public static Category createCategory(Long categoryId, String name) {
 
         return new Category.Builder()
                 .setCategoryId(categoryId)

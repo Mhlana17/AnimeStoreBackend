@@ -12,7 +12,7 @@ class CategoryFactoryTest {
 
     @Test
     void testBuildCategory() {
-        Category category = CategoryFactory.buildCategory("HD-01", "Hoodies");
+        Category category = CategoryFactory.createCategory(7568759L, "Hoodies");
 
         assertNotNull(category);
         System.out.println(category.toString());

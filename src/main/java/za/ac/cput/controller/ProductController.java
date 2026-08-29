@@ -21,7 +21,7 @@ public class ProductController {
     private ProductService productService;
 
     @Autowired
-    private CategoryService categoryService;
+   private CategoryService categoryService;
 
     @PostMapping
     public ResponseEntity<Product> createProduct(
@@ -40,7 +40,7 @@ public class ProductController {
         Category category = categoryService.getById(category_Id);
         if (category == null) {
             return ResponseEntity.badRequest().build();
-        }
+          }
 
         // 2. CREATE PRODUCT WITH THE CATEGORY
         Product product = new Product.Builder()
